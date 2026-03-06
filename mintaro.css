@@ -1,0 +1,1217 @@
+/**
+ * Mintaro - Professional Rich Text Editor CSS
+ * Clean, well-spaced, professional appearance
+ */
+
+/* ========================================
+   CSS VARIABLES
+   ======================================== */
+
+:root {
+    --mint-primary: #10b981;
+    --mint-dark: #059669;
+    --mint-light: #d1fae5;
+    --mint-bg: #f0fdf4;
+    --text-dark: #1f2937;
+    --text-mid: #4b5563;
+    --text-light: #6b7280;
+    --border-color: #e5e7eb;
+    --border-dark: #d1d5db;
+    --toolbar-bg: #fafbfc;
+    --button-hover: #f3f4f6;
+    --editor-bg: #ffffff;
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --transition: 0.15s ease;
+}
+
+/* ========================================
+   EDITOR CONTAINER
+   ======================================== */
+
+.mintaro-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--editor-bg);
+    box-shadow: var(--shadow-md);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+    color: var(--text-dark);
+    position: relative;
+}
+
+/* ========================================
+   BRANDING HEADER
+   ======================================== */
+
+.mintaro-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    background: var(--editor-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.mintaro-logo {
+    height: 40px;
+    width: auto;
+    flex-shrink: 0;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.08));
+}
+
+/* ========================================
+   TOOLBAR
+   ======================================== */
+
+.mintaro-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    padding: 6px 8px;
+    background: var(--toolbar-bg);
+    border-bottom: 1px solid var(--border-color);
+    align-items: center;
+    min-height: 42px;
+    position: relative;
+    user-select: none;
+}
+
+.mintaro-toolbar-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
+    padding: 0 2px;
+}
+
+.mintaro-toolbar-separator {
+    width: 1px;
+    height: 24px;
+    background: var(--border-color);
+    margin: 0 4px;
+    flex-shrink: 0;
+}
+
+/* ========================================
+   TOOLBAR BUTTONS
+   ======================================== */
+
+.mintaro-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 6px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-mid);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    line-height: 1;
+    transition: all var(--transition);
+    white-space: nowrap;
+    position: relative;
+}
+
+.mintaro-button:hover {
+    background: var(--button-hover);
+    border-color: var(--border-color);
+    color: var(--text-dark);
+}
+
+.mintaro-button:active {
+    background: #e5e7eb;
+    transform: translateY(0);
+}
+
+.mintaro-button.active {
+    background: var(--mint-light);
+    color: var(--mint-dark);
+    border-color: var(--mint-primary);
+}
+
+.mintaro-button svg,
+.mintaro-button .mintaro-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+/* Text labels on buttons */
+.mintaro-button strong { font-weight: 700; }
+.mintaro-button em { font-style: italic; }
+.mintaro-button u { text-decoration: underline; }
+.mintaro-button s { text-decoration: line-through; }
+
+/* ========================================
+   EDITOR CONTENT AREA
+   ======================================== */
+
+.mintaro-editor-content {
+    padding: 20px 24px;
+    min-height: 400px;
+    max-height: 70vh;
+    overflow-y: auto;
+    outline: none;
+    line-height: 1.7;
+    font-size: 15px;
+    color: var(--text-dark);
+    background: var(--editor-bg);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.mintaro-editor-content:focus {
+    box-shadow: inset 0 0 0 2px rgba(16, 185, 129, 0.1);
+}
+
+/* Placeholder */
+.mintaro-editor-content.placeholder-active:before {
+    content: attr(data-placeholder);
+    color: #9ca3af;
+    font-style: italic;
+    pointer-events: none;
+    position: absolute;
+}
+
+.mintaro-editor-content:not(:empty).placeholder-active:before {
+    display: none;
+}
+
+/* Drag over state */
+.mintaro-editor-content.mintaro-dragover {
+    background: var(--mint-bg);
+    outline: 2px dashed var(--mint-primary);
+    outline-offset: -4px;
+}
+
+/* Content styling */
+.mintaro-editor-content h1 { font-size: 2em; font-weight: 800; margin: 0.5em 0 0.3em; line-height: 1.2; }
+.mintaro-editor-content h2 { font-size: 1.5em; font-weight: 700; margin: 0.5em 0 0.3em; line-height: 1.3; }
+.mintaro-editor-content h3 { font-size: 1.25em; font-weight: 700; margin: 0.5em 0 0.3em; line-height: 1.4; }
+.mintaro-editor-content h4 { font-size: 1.1em; font-weight: 600; margin: 0.5em 0 0.3em; }
+.mintaro-editor-content p { margin: 0 0 0.8em; }
+.mintaro-editor-content ul, .mintaro-editor-content ol { margin: 0.5em 0 0.8em 1.5em; padding: 0; }
+.mintaro-editor-content li { margin: 0.25em 0; }
+.mintaro-editor-content blockquote {
+    margin: 0.8em 0;
+    padding: 12px 16px;
+    border-left: 3px solid var(--mint-primary);
+    background: var(--mint-bg);
+    font-style: italic;
+    color: var(--text-mid);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.mintaro-editor-content pre {
+    margin: 0.8em 0;
+    padding: 14px 16px;
+    background: #f8f9fa;
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--mint-primary);
+    border-radius: var(--radius-sm);
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    overflow-x: auto;
+    white-space: pre-wrap;
+}
+.mintaro-editor-content code {
+    background: #f3f4f6;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', Monaco, Consolas, monospace;
+    font-size: 0.9em;
+    color: var(--mint-dark);
+}
+.mintaro-editor-content pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+}
+.mintaro-editor-content a {
+    color: var(--mint-primary);
+    text-decoration: underline;
+    text-decoration-color: rgba(16, 185, 129, 0.3);
+    text-underline-offset: 2px;
+}
+.mintaro-editor-content a:hover {
+    color: var(--mint-dark);
+    text-decoration-color: var(--mint-primary);
+}
+.mintaro-editor-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-sm);
+    margin: 8px 0;
+    cursor: pointer;
+}
+.mintaro-editor-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+}
+.mintaro-editor-content td, .mintaro-editor-content th {
+    border: 1px solid var(--border-dark);
+    padding: 8px 12px;
+    text-align: left;
+    min-width: 60px;
+}
+.mintaro-editor-content th {
+    background: #f3f4f6;
+    font-weight: 600;
+}
+.mintaro-editor-content hr {
+    border: none;
+    height: 1px;
+    background: var(--border-color);
+    margin: 20px 0;
+}
+
+/* Checklist */
+.mintaro-editor-content .mintaro-checklist {
+    list-style: none;
+    padding-left: 0;
+    margin: 0.5em 0;
+}
+.mintaro-editor-content .mintaro-checklist li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+}
+.mintaro-editor-content .mintaro-checklist input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--mint-primary);
+}
+
+/* ========================================
+   STATUS BAR
+   ======================================== */
+
+.mintaro-status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 16px;
+    background: var(--toolbar-bg);
+    border-top: 1px solid var(--border-color);
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+.mintaro-stats {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.mintaro-stat {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.mintaro-stat-icon {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+/* Autosave indicator */
+.mintaro-autosave-indicator {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: var(--mint-primary);
+    font-size: 12px;
+}
+.mintaro-autosave-indicator.visible {
+    opacity: 1;
+}
+
+/* ========================================
+   MODAL SYSTEM
+   ======================================== */
+
+.mintaro-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100000;
+    animation: mintaro-fade-in 0.15s ease;
+    padding: 20px;
+}
+
+.mintaro-modal-overlay.closing {
+    animation: mintaro-fade-out 0.15s ease;
+}
+
+@keyframes mintaro-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes mintaro-fade-out { from { opacity: 1; } to { opacity: 0; } }
+
+.mintaro-modal-dialog {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: mintaro-slide-up 0.2s ease;
+}
+
+@keyframes mintaro-slide-up {
+    from { transform: translateY(10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.mintaro-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.mintaro-modal-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.mintaro-modal-close {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    color: var(--text-light);
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition);
+}
+
+.mintaro-modal-close:hover {
+    background: #f3f4f6;
+    color: var(--text-dark);
+}
+
+.mintaro-modal-body {
+    padding: 20px;
+}
+
+.mintaro-modal-footer {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    padding: 16px 20px;
+    border-top: 1px solid var(--border-color);
+    background: #fafbfc;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+/* ========================================
+   FORM ELEMENTS
+   ======================================== */
+
+.mintaro-form-group {
+    margin-bottom: 14px;
+}
+
+.mintaro-form-group:last-child {
+    margin-bottom: 0;
+}
+
+.mintaro-form-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-mid);
+    margin-bottom: 6px;
+}
+
+.mintaro-form-input {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text-dark);
+    background: white;
+    transition: border-color var(--transition), box-shadow var(--transition);
+    outline: none;
+}
+
+.mintaro-form-input:focus {
+    border-color: var(--mint-primary);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.mintaro-form-input.mintaro-input-error {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.mintaro-form-hint {
+    display: block;
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 4px;
+}
+
+.mintaro-form-row {
+    display: flex;
+    gap: 12px;
+}
+
+.mintaro-form-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-mid);
+}
+
+.mintaro-form-checkbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--mint-primary);
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+
+.mintaro-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all var(--transition);
+    background: white;
+    color: var(--text-mid);
+    white-space: nowrap;
+}
+
+.mintaro-btn:hover {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+}
+
+.mintaro-btn-primary {
+    background: var(--mint-primary);
+    color: white;
+    border-color: var(--mint-primary);
+}
+
+.mintaro-btn-primary:hover {
+    background: var(--mint-dark);
+    border-color: var(--mint-dark);
+}
+
+.mintaro-btn-danger {
+    background: #ef4444;
+    color: white;
+    border-color: #ef4444;
+}
+
+.mintaro-btn-danger:hover {
+    background: #dc2626;
+    border-color: #dc2626;
+}
+
+/* ========================================
+   DROPDOWN MENUS
+   ======================================== */
+
+.mintaro-dropdown {
+    position: absolute;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: 4px;
+    min-width: 160px;
+    max-height: 320px;
+    overflow-y: auto;
+    z-index: 10000;
+    animation: mintaro-fade-in 0.1s ease;
+}
+
+.mintaro-dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    border: none;
+    background: transparent;
+    color: var(--text-dark);
+    font-size: 13px;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: background var(--transition);
+    white-space: nowrap;
+}
+
+.mintaro-dropdown-item:hover {
+    background: var(--mint-bg);
+    color: var(--mint-dark);
+}
+
+/* ========================================
+   TAB BAR
+   ======================================== */
+
+.mintaro-tab-bar {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 16px;
+}
+
+.mintaro-tab {
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    color: var(--text-light);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all var(--transition);
+}
+
+.mintaro-tab:hover {
+    color: var(--text-dark);
+}
+
+.mintaro-tab.active {
+    color: var(--mint-primary);
+    border-bottom-color: var(--mint-primary);
+}
+
+/* ========================================
+   FIND & REPLACE BAR
+   ======================================== */
+
+.mintaro-findbar {
+    display: flex;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border-bottom: 1px solid var(--border-color);
+    gap: 8px;
+    align-items: center;
+}
+
+.mintaro-findbar-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.mintaro-findbar-input {
+    padding: 5px 10px;
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-family: inherit;
+    width: 160px;
+    outline: none;
+    transition: border-color var(--transition);
+}
+
+.mintaro-findbar-input:focus {
+    border-color: var(--mint-primary);
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15);
+}
+
+.mintaro-findbar-option {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--text-light);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.mintaro-findbar-option input {
+    accent-color: var(--mint-primary);
+}
+
+.mintaro-findbar-count {
+    font-size: 12px;
+    color: var(--text-light);
+    min-width: 70px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.mintaro-findbar-btn {
+    padding: 4px 10px;
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-sm);
+    background: white;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    color: var(--text-mid);
+    transition: all var(--transition);
+    white-space: nowrap;
+}
+
+.mintaro-findbar-btn:hover {
+    background: var(--mint-bg);
+    border-color: var(--mint-primary);
+    color: var(--mint-dark);
+}
+
+.mintaro-findbar-close {
+    padding: 4px 8px;
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--text-light);
+    border-radius: var(--radius-sm);
+    line-height: 1;
+}
+
+.mintaro-findbar-close:hover {
+    background: #fee2e2;
+    color: #ef4444;
+}
+
+/* Find highlights */
+.mintaro-highlight {
+    background: #fef08a;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+
+.mintaro-highlight-active {
+    background: #fb923c;
+    color: white;
+    border-radius: 2px;
+}
+
+/* ========================================
+   TABLE GRID PICKER
+   ======================================== */
+
+.mintaro-table-grid-container {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.mintaro-table-grid {
+    display: inline-grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 3px;
+    padding: 8px;
+    background: #f9fafb;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.mintaro-grid-cell {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.08s ease;
+}
+
+.mintaro-grid-cell:hover,
+.mintaro-grid-cell.active {
+    background: var(--mint-light);
+    border-color: var(--mint-primary);
+}
+
+.mintaro-table-grid-label {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+/* ========================================
+   COLOR PICKER
+   ======================================== */
+
+.mintaro-color-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 3px;
+}
+
+.mintaro-color-swatch {
+    width: 100%;
+    aspect-ratio: 1;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    padding: 0;
+}
+
+.mintaro-color-swatch:hover {
+    transform: scale(1.2);
+    z-index: 1;
+    border-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.mintaro-color-custom-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.mintaro-color-preview-box {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-dark);
+    background: #000;
+    flex-shrink: 0;
+}
+
+/* ========================================
+   IMAGE SYSTEM
+   ======================================== */
+
+.mintaro-img-wrapper {
+    display: inline-block;
+    position: relative;
+    max-width: 100%;
+    line-height: 0;
+}
+
+.mintaro-img-wrapper.selected {
+    outline: 2px solid var(--mint-primary);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+.mintaro-img-toolbar {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 2px;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 4px 6px;
+    box-shadow: var(--shadow-md);
+    z-index: 10;
+    white-space: nowrap;
+}
+
+.mintaro-img-toolbar button {
+    padding: 4px 8px;
+    border: none;
+    background: transparent;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 3px;
+    color: var(--text-mid);
+    transition: all var(--transition);
+    font-family: inherit;
+}
+
+.mintaro-img-toolbar button:hover {
+    background: var(--mint-bg);
+    color: var(--mint-dark);
+}
+
+.mintaro-img-toolbar-sep {
+    width: 1px;
+    background: var(--border-color);
+    margin: 2px 2px;
+}
+
+/* Upload zone */
+.mintaro-upload-zone {
+    border: 2px dashed var(--border-dark);
+    border-radius: var(--radius-md);
+    padding: 32px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition);
+    color: var(--text-light);
+}
+
+.mintaro-upload-zone:hover,
+.mintaro-upload-zone.active {
+    border-color: var(--mint-primary);
+    background: var(--mint-bg);
+    color: var(--mint-dark);
+}
+
+.mintaro-upload-zone p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* ========================================
+   EMOJI PICKER
+   ======================================== */
+
+.mintaro-emoji-search-wrap {
+    padding: 0 0 10px;
+}
+
+.mintaro-emoji-search {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    background: #f9fafb;
+    color: var(--text-dark);
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.mintaro-emoji-search:focus {
+    border-color: var(--mint-primary);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    background: #fff;
+}
+
+.mintaro-emoji-search::placeholder {
+    color: var(--text-light);
+}
+
+.mintaro-emoji-tabs {
+    display: flex;
+    gap: 1px;
+    padding: 0 0 8px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.mintaro-emoji-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.mintaro-emoji-tab {
+    padding: 5px 7px;
+    border: 1px solid transparent;
+    background: transparent;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition);
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.mintaro-emoji-tab:hover {
+    background: var(--button-hover);
+}
+
+.mintaro-emoji-tab.active {
+    background: var(--mint-light);
+    border-color: var(--mint-primary);
+}
+
+.mintaro-emoji-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 2px;
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 2px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-dark) transparent;
+}
+
+.mintaro-emoji-grid::-webkit-scrollbar {
+    width: 6px;
+}
+
+.mintaro-emoji-grid::-webkit-scrollbar-thumb {
+    background: var(--border-dark);
+    border-radius: 3px;
+}
+
+.mintaro-emoji-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1;
+    border: none;
+    background: transparent;
+    font-size: 22px;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: background 0.1s ease, transform 0.1s ease;
+    padding: 0;
+}
+
+.mintaro-emoji-btn:hover {
+    background: var(--button-hover);
+    transform: scale(1.2);
+}
+
+.mintaro-emoji-count {
+    padding: 6px 0 0;
+    font-size: 11px;
+    color: var(--text-light);
+    text-align: right;
+}
+
+/* ========================================
+   HTML SOURCE EDITOR
+   ======================================== */
+
+.mintaro-source-textarea {
+    width: 100%;
+    min-height: 350px;
+    padding: 14px;
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-sm);
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-dark);
+    background: #f8f9fa;
+    resize: vertical;
+    outline: none;
+    tab-size: 2;
+}
+
+.mintaro-source-textarea:focus {
+    border-color: var(--mint-primary);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* ========================================
+   HELP DIALOG
+   ======================================== */
+
+.mintaro-help-content h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--mint-dark);
+    margin: 16px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.mintaro-help-content h4:first-child {
+    margin-top: 0;
+}
+
+.mintaro-help-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 16px;
+    align-items: center;
+    font-size: 13px;
+}
+
+.mintaro-help-grid kbd {
+    display: inline-block;
+    padding: 2px 8px;
+    background: #f3f4f6;
+    border: 1px solid var(--border-dark);
+    border-radius: 3px;
+    font-family: 'SF Mono', Monaco, Consolas, monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-mid);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.mintaro-help-grid span {
+    color: var(--text-mid);
+}
+
+/* ========================================
+   FULLSCREEN MODE
+   ======================================== */
+
+.mintaro-fullscreen {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 99999 !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+    box-shadow: none !important;
+}
+
+.mintaro-fullscreen .mintaro-editor-content {
+    max-height: none;
+    flex: 1;
+}
+
+/* ========================================
+   NOTIFICATIONS
+   ======================================== */
+
+.mintaro-notification {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    padding: 10px 16px;
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: var(--shadow-md);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: auto;
+    max-width: 320px;
+}
+
+.mintaro-notification.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.mintaro-notification-info {
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+}
+
+.mintaro-notification-success {
+    background: var(--mint-bg);
+    color: var(--mint-dark);
+    border: 1px solid var(--mint-light);
+}
+
+.mintaro-notification-error {
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+/* ========================================
+   DARK MODE
+   ======================================== */
+
+@media (prefers-color-scheme: dark) {
+    .mintaro-container.dark-mode {
+        background: #1e293b;
+        border-color: #334155;
+        color: #e2e8f0;
+    }
+    .mintaro-container.dark-mode .mintaro-toolbar { background: #1e293b; border-color: #334155; }
+    .mintaro-container.dark-mode .mintaro-button { color: #94a3b8; }
+    .mintaro-container.dark-mode .mintaro-button:hover { background: #334155; color: #e2e8f0; }
+    .mintaro-container.dark-mode .mintaro-editor-content { background: #0f172a; color: #e2e8f0; }
+    .mintaro-container.dark-mode .mintaro-status-bar { background: #1e293b; border-color: #334155; color: #64748b; }
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .mintaro-toolbar {
+        padding: 4px;
+        gap: 1px;
+    }
+
+    .mintaro-button {
+        min-width: 28px;
+        height: 28px;
+        font-size: 12px;
+        padding: 0 4px;
+    }
+
+    .mintaro-toolbar-separator {
+        height: 20px;
+        margin: 0 2px;
+    }
+
+    .mintaro-editor-content {
+        padding: 14px 16px;
+        font-size: 14px;
+    }
+
+    .mintaro-findbar-row {
+        flex-wrap: wrap;
+    }
+
+    .mintaro-findbar-input {
+        width: 120px;
+    }
+
+    .mintaro-modal-dialog {
+        margin: 10px;
+    }
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+
+@media print {
+    .mintaro-toolbar,
+    .mintaro-status-bar,
+    .mintaro-header,
+    .mintaro-findbar,
+    .mintaro-img-toolbar,
+    .mintaro-notification {
+        display: none !important;
+    }
+
+    .mintaro-container {
+        border: none;
+        box-shadow: none;
+    }
+
+    .mintaro-editor-content {
+        max-height: none;
+        overflow: visible;
+    }
+}

@@ -1,0 +1,8 @@
+.htpasswd
+.env
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.claude/
